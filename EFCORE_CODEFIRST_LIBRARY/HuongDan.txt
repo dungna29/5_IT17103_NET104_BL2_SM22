@@ -18,6 +18,6 @@ Lứu ý:
 
 MONG RẰNG CÁC BẠN SẼ CHỊU KHÓ HỌC FLUENT API SỚM.
 Thư mục:
-1. Repositories
+1. Repositories: Sẽ chứa các Repo của các bảng  và mỗi bảng sẽ có 1 Repo tương ứng. Bên trong nó sẽ là các Phương thức CRUD. Nó là thằng duy nhất được phép làm việc với CSDL
 2. Context
 3. DomainClass

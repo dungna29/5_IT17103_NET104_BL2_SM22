@@ -1,0 +1,67 @@
+﻿A. Controller:
+	1. Định nghĩa: Controller là thành phần đầu tiên nhận request từ người dùng. Khi người dùng truy cập URL qua trình duyệt, ASP.NET Core routing sẽ map request đó vào controller cụ thể.
+				- Ví dụ: Request URL như sau: http://localhost/Home/index
+				Controller có tên là Home được gọi.
+				Sau đó nó sẽ gọi đến Action method tên index rồi tạo ra response trả về cho user.
+	2. Nhiệm vụ:
+		- Nhận Request: Controller có trách nhiệm nhận request từ user.
+		- Dựng Model: Controller Action method thực thi logic của ứng dụng và xây dựng nên model.
+		- Gửi trả respone: Cuối cùng nó sẽ trả về kết quả trong HTML, File, JSON, XML hoặc bất cứ định dạng nào về cho user.
+	3. Lưu ý: Controller không khác gì so với .NET Class thông thường. Chỉ có điều nó nằm trong thư mục Controllers là thư mục nằm trong thư mục gốc của ứng dụng. Bạn có thể tạo mới controller bằng cách chọn thư mục Controllers và chuột phải chọn Add-> Controller.
+		2 loại: MVC Controller, API Controller, Cả MVC và API controller đều kế thừa từ cùng class Controller nên nó không khác nhau nhiều. Ngoại trừ API controller nhằm mục đích trả về dữ liệu được định dạng cho client.
+	4. Ví dụ: HomeController
+
+/***************************/
+B. Action Method:
+	1. Định nghĩa: Các phương thức public của lớp Controller được gọi là Phương thức hành động (Action method)
+		- Action method phải là một public method. Không thể private hay protected
+		- Action method không thể là static method hoặc một extension method.
+		- Constructor, getter, setter không được sử dụng.
+		- Các phương thức được kế thừa không được sử dụng như là một action method.
+		- Action method không được chứa từ khóa ref hoặc out trên tham số.
+		- Action method không được chứa thuộc tính [NonAction]
+		- Ation method không thể được nạp chồng (overloaded)
+	2. Sử dụng: http://localhost/Home/index => Sẽ gọi action method tên index trong GiaoVienController
+	3. Trả về: Action trả về view
+	4. Ví dụ: Xem trong GiaoVienController
+/***************************/
+C. Routing:
+	1. Định nghĩa:Quá trình tiếp nhận và xử lý cơ bản ứng dụng mvc, Routing là thành phần tiếp nhận và phân phối request đến controller,Routing trong ASP.NET Core là quá trình xem xét các URL request gửi đến và "chỉ đường" cho nó đến Controller Actions, và được sử dụng để tạo ra URL đầu ra  Quá trình này được đảm nhiệm bởi Routing Middleware. Routing Middleware có sẵn trong thư viện Microsoft.AspNetCore.Routing.
+	2. Nhiệm vụ:
+				- Map request đến vào Controller Action tương ứng.
+				- Tạo ra URL đầu ra tương ứng với Controller action.
+		+ Cách thức:
+			- Khi request đến thì Routing Middleware sẽ
+			- Phân tích URL
+			- Tìm kiếm có Route nào match trong RouteCollection
+			- Nếu Route tìm thấy  thì đẩy sang RouteHandler
+			- Nếu không tìm thấy Route thì bỏ qua,gọi middleware tiếp theo
+	3.Các khái niệm:
+		a. Route:
+			- Route tương tự như bản đồ. Chúng ta sử dụng bản đồ để đi đến điểm đích. Tương tự như thế, ứng dụng ASP.NET Core sử dụng Route để đến controller action.
+			- Route bao gồm các thông tin như tên, mẫu URL (URL pattern) hay còn gọi là template url, thông tin controller action mặc định và ràng buộc (constraints). Route được định nghĩa trong Microsoft.AspNetCore.Routing.
+			- URL pattern được so sánh với URL đến xem có đúng mẫu không. Một ví dụ của URL pattern là: {controller=Home}/{action=Index}/{id?}
+		b. RouteCollection: là một tập hợp tất cả các Route trong ứng dụng, các Route sẽ thêm vào collection khi ứng dụng khởi động. Route Module sẽ tìm kiếm một Route match với URL request đến trong mỗi một Route của Route Collection.
+		c. RouteHandler: RouteHandler là một thành phần quyết định sẽ làm gì với Route. Khi cơ chế routing tìm được một Route thích hợp cho một request đến, nó sẽ gọi đến RouteHandler và gửi route đó cho RouteHandler xử lý. Route Handler là class triển khai từ interface IRouteHandler. Trong ASP.NET Core thì Route được xử lý bởi MvcRouteHandler.
+		d. URL Patterns: => {controller=Home}/{action=Index}/{id?}
+			- Mỗi Route phải chứa một URL Pattern. Pattern này sẽ được so sánh với URL request. Nếu pattern khớp với URL thì nó sẽ được sử dụng bởi hệ thống routing để xử lý URL đó. Mỗi một URL Pattern bao gồm một hoặc nhiều phần. Các phần chia tách bởi dấu gạch chéo.
+			- Route Parameter được bao gọc bởi một cặp dấu ngoặc nhọn ví dụ {controller}, {action}.
+			- Route Parameter có thể có giá trị mặc định như {controller=Home} khi Home là giá trị mặc định của controller. Một dấu = sẽ gán giá trị cho tên parameter.
+			- Dấu ? trong {id?} chỉ ra là tham số này không bắt buộc. Một dấu ? sau tên tham số chỉ ra tham số đó không yêu cầu phải có giá trị.
+			- URL {controller=Home}/{action=Index}/{id?}: Đăng ký một route có thành phần đầu tiên trên URL là một controller, phần thứ 2 là Action method trong controller đó. Và phần cuối là dữ liệu thêm vào tên là id
+		e. URL Matching
+			- Mỗi phần trong URL request đến sẽ match tương ứng với thành phần của URL Pattern.
+			- Giải sử có: URL {controller=GiaoVien}/{action=Index}/{id?}:
+			- ví dụ URL www.poly.com/giaovien/index thì URL này có 2 thành phần. URL này vẫn match với pattern ở trên vì phần thứ 3 không yêu cầu.
+			- ví dụ URL www.poly.com/giaovien cũng match với URL pattern ở trên mặc dù nó chỉ có một thành phần. Vì phần cho action có giá trị mặc định là Index. Nếu không có thành phần tương ứng trong URL và thành phần đó có giá trị mặc định trong Pattern thì giá trị mặc định sẽ được chọn bởi Routing Engine.
+			- ví dụ URL www.poly.com  cũng được match với URL Pattern ở trên vì là thành phần đầu tiên controller cũng có giá trị mặc định là Home. URL này được nhận diện: {controller}=Home và {action}=Index
+			- ví dụ URL www.poly.com/giaovien/index /10 được nhận diện như là {controller}=Home,{action}=Index và{id}=10.
+			- Nếu Controller Action method không tồn tại và ứng dụng trả về lỗi 404.
+			- ASP.NET Core routing engine kiểm tra sự tồn tại của Controller và Action method cho mỗi route. Nếu không có controller và action method tương ứng trong ứng dụng thì cũng không được match ngay cả khi Route tồn tại.
+	4. Trong ASP.NET Core MVC có thể định nghĩa routing theo 2 cách:
+		a. Conventional Routing:  tạo ra Route dựa trên một loạt các quy tắc được định nghĩa trong file Startup.cs
+		b. Attribute Routing: Tạo các Route dựa trên các attribute đặt trong Controller action
+	5. Ví dụ: Bài 1: Can thiệp Attribute Routing trong SinhVienController
+
+
+

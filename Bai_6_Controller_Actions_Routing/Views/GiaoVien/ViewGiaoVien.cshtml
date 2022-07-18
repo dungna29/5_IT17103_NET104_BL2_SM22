@@ -1,0 +1,33 @@
+﻿@using Bai_6_Controller_Actions_Routing.Models
+@{
+    Layout = null;
+}
+@{
+    // Since Product isn't a string, it requires a cast.
+    var product = ViewData["GiaoVien"] as GiaoVien;
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ViewGiaoVien</title>
+    <style>
+        img {
+            float: left;
+            width: 170px;
+            height: 180px;
+        }
+    </style>
+</head>
+<body>
+    <h1>View Data: @ViewData["Key Dungna"]</h1>
+    <h1>View Data: @product.Ten</h1>
+    <h1>View Data: @product.MaGV</h1>
+    <h1>View Data: @product.Email</h1>
+    <img src="@product.Image" /><br/>
+<h1>View Bag: @ViewBag.DungnaPoly</h1>
+<h1>--------------------------------------</h1>
+
+</body>
+</html>
