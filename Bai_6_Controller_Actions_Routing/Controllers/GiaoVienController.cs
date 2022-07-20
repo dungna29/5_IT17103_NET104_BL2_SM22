@@ -11,6 +11,8 @@ namespace Bai_6_Controller_Actions_Routing.Controllers
             return View();
         }
 
+        //locahost:/giaovien/viewgiaovien
+        //Khi có 1 Action sẽ đi kèm với 1 1 View
         public IActionResult ViewGiaoVien()
         {
             ViewData["Key Dungna"] = "Đây là string từ GiaoVien Contronller";//Sử dụng Key là Key Dungna ở bên View gọi ra

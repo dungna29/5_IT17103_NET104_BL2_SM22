@@ -3,7 +3,7 @@
 				- Ví dụ: Request URL như sau: http://localhost/Home/index
 				Controller có tên là Home được gọi.
 				Sau đó nó sẽ gọi đến Action method tên index rồi tạo ra response trả về cho user.
-	2. Nhiệm vụ:
+	2. Nhiệm vụ:  
 		- Nhận Request: Controller có trách nhiệm nhận request từ user.
 		- Dựng Model: Controller Action method thực thi logic của ứng dụng và xây dựng nên model.
 		- Gửi trả respone: Cuối cùng nó sẽ trả về kết quả trong HTML, File, JSON, XML hoặc bất cứ định dạng nào về cho user.
@@ -21,7 +21,7 @@ B. Action Method:
 		- Action method không được chứa từ khóa ref hoặc out trên tham số.
 		- Action method không được chứa thuộc tính [NonAction]
 		- Ation method không thể được nạp chồng (overloaded)
-	2. Sử dụng: http://localhost/Home/index => Sẽ gọi action method tên index trong GiaoVienController
+	2. Sử dụng: http://localhost/Home/index => Sẽ gọi action method tên index trong HomeController
 	3. Trả về: Action trả về view
 	4. Ví dụ: Xem trong GiaoVienController
 /***************************/

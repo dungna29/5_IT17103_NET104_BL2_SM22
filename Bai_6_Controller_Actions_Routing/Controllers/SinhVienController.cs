@@ -11,6 +11,7 @@ namespace Bai_6_Controller_Actions_Routing.Controllers
          *
          */
 
+        // [Route("")]
         [Route("sinh-vien")]
         [Route("sinh-vien/trangchu")]
         public IActionResult Index()
@@ -29,14 +30,6 @@ namespace Bai_6_Controller_Actions_Routing.Controllers
         {
             ViewBag.So = id;
             return View();
-        }
-
-        [Route("")]//Nếu trong trường hợp url rỗng thì sẽ vào action dưới dây
-        [Route("/sinh-vien/HandleError/{code:int?}")]
-        public IActionResult HandleError(int code)
-        {
-            ViewData["Mess"] = $"Toang rồi bạn ơi. The ErrorCode is: {code}";
-            return View("~/Views/SinhVien/HandleError.cshtml");
         }
     }
 }

@@ -5,6 +5,6 @@
         public string MaGV { get; set; }
         public string Ten { get; set; }
         public string Email { get; set; }
-        public string Image { get; set; }
+        public string Image { get; set; }//Đường dẫn ảnh
     }
 }

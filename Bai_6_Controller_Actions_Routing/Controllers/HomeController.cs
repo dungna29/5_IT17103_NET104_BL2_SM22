@@ -20,7 +20,7 @@ namespace Bai_6_Controller_Actions_Routing.Controllers
 
         public IActionResult Index()
         {
-            ViewBag.Mess = "Xin chào đây là trang chủ của sinh viên";
+            ViewBag.Mess = "Xin chào đây là trang chủ của Home";
             return View();
         }
 

@@ -42,31 +42,18 @@ namespace Bai_6_Controller_Actions_Routing
             app.UseRouting();
 
             app.UseAuthorization();
-            // app.UseStatusCodePages(context =>
-            // {
-            //     var request = context.HttpContext.Request;
-            //     var response = context.HttpContext.Response;
-            //     var code = response.StatusCode;
-            //
-            //     if (response.StatusCode == (int)HttpStatusCode.Unauthorized)
-            //     {
-            //         response.Redirect("/sinh-vien");
-            //     }
-            //
-            //     return Task.CompletedTask;
-            // });
 
             app.UseEndpoints(endpoints =>
             {
                 //Multiple Routes: Tạo ra nhiều route bên trong UseEndpoints() bằng nhiều MapControllerRoute()
 
-                // endpoints.MapControllerRoute(
-                //     name: "default",
-                //     pattern: "{controller=Home}/{action=Index}/{id?}");
-
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=SinhVien}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
+
+                // endpoints.MapControllerRoute(
+                //     name: "default",
+                //     pattern: "{controller=sinh-vien}/{action=trangchu}/{id?}");
             });
         }
     }
