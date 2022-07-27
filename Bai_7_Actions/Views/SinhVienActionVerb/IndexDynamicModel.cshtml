@@ -1,0 +1,50 @@
+﻿@using Bai_7_Actions.DomainClass
+@model dynamic
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>IndexViewData</title>
+</head>
+<body>
+<h2>@ViewBag.Message</h2>
+<p><b>Danh sách giảng viên</b></p>
+
+<table>
+    <tr>
+        <th>MaGV</th>
+        <th>Ten</th>
+        <th>Email</th>
+    </tr>
+    @foreach (GiangVien teacher in Model.GiangViens)
+    {
+        <tr>
+            <td>@teacher.MaGV</td>
+            <td>@teacher.Ten</td>
+            <td>@teacher.Email</td>
+        </tr>
+    }
+</table>
+<p><b>Danh sách sinh viên</b></p>
+<table>
+    <tr>
+        <th>MaGV</th>
+        <th>Ten</th>
+        <th>Email</th>
+    </tr>
+    @foreach (SinhVien student in  Model.SinhViens)
+    {
+        <tr>
+            <td>@student.MaSV</td>
+            <td>@student.Ten</td>
+            <td>@student.Email</td>
+        </tr>
+    }
+</table>
+</body>
+</html>

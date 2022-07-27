@@ -1,0 +1,28 @@
+﻿@model QLSVGVViewModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Tạo mới Sinh Viên Poly</title>
+</head>
+<body>
+<form action="/sinhvienav/Create" method="post">
+    <label for="Ten">Tên</label>
+    <input type="text" name="Ten" />
+
+    <label for="MaSV">Mã Sinh Viên: </label>
+    <input type="text" name="MaSV" />
+
+    <label for="Email">Email: </label>
+    <input type="email" name="Email"/>
+
+    <input type="submit" name="Gửi"/>
+
+</form>
+</body>
+</html>

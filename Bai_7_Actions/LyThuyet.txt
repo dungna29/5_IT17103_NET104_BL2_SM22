@@ -1,0 +1,17 @@
+﻿Action Selectors & Action Verbs & Action Results
+	A. Action Selector: Action selector là một attribute có thể được áp dụng co controller action. Các attribute này giúp Routing Engine chọn đúng action method để xử lý request. ASP.NET Core bao gồm 3 kiểu Action Selector:
+		1. ActionName: ActionName attribute định nghĩa tên của một action. Routing engine sẽ sử dụng tên này thay vì tên phương thức để match với action name trong routing. Bạn sẽ dùng attribute này khi bạn muốn một alias cho tên phương thức: Nói cách khác chúng at muốn thay đổi tên Action method khi gọi trên url
+		2. NonAction:Public method trong class controller được gọi như Action methods. Các phương thức này có thể được gọi bởi bất cứ ai ở bất cứ đâu trên thế giới đơn giản chỉ cần gõ URL lên trình duyệt. Bạn có thể cho Routing Engine biết đó là một phương thức đặc biệt không phải là một Action method bằng cách đặt attribute NonAction
+		Ví dụ 1 2: SinhVienActionSelectorController
+		3. Action Verbs:Action verbs selector được sử dụng khi bạn muốn điều kiển action method dựa trên HTTP Request method. Điều này được đảm nhiệm sử dụng tập các attribute bởi MVC, ví dụ như HttpGet và HttpPost. Nó được gọi là Http Attributes.
+			a. Một số HTTP Verbs có sẵn trong ưng dụng ASP.NET Core. Chúng là GET, POST, PUT, DELETE, HEAD, OPTIONS, PATCH. Mỗi verbs này kết hợp với HTTP Method Attributes được định nghĩa trong namespace Microsoft.AspNetCore.Mvc.Routing.
+			b. HTTP Attribute cho phép chúng ta định nghĩa 2 phương thức với cùng tên nhưng khác kiểu response với HTTP Verb khác nhau.
+		Ví dụ 3: SinhVienActionVerbController
+		Sử dụng nhiều Action Verbs: AcceptVerbs  attribute cho phép sử dụng nhiều action verb trên action method:
+	B. Action Results
+		1. Định nghĩa: Controller Action sẽ trả về kết quả cho client. Client có thể mong muốn một kết quả đơn giản như là chuỗi hay số nguyên hoặc một kết quả phức tạp như là JSON hay HTML view hoặc file để download. Có các loại Action Result khác nhau sẵn có giúp xây dựng các loại kết quả trả về khác nhau cho client
+			+ ControllerBase trong Controller có sẵn các helper class để tạo ra các ActionResult trả về cho client dễ hơn thay vì phải viết code nhiều đó là lợi ích đem lại.
+		2.IActionResult và ActionResult:
+			+ IActionResult là một interface nó định nghĩa một khuôn mẫu cho toàn bộ các Action Result của một action method.
+			+ ActionResult là một abstract base class triển khai interface IActionResult. Action result như ViewResult, PartialViewResult hay JsonResult...đều kế thừa từ ActionResult base class.
+		Ví dụ: 

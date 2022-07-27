@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EFCORE_CODEFIRST_FLUENT_API.Migrations
 {
     [DbContext(typeof(POLYDbContext))]
-    [Migration("20220725132524_250722")]
-    partial class _250722
+    [Migration("20220726163132_2607")]
+    partial class _2607
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -71,7 +71,7 @@ namespace EFCORE_CODEFIRST_FLUENT_API.Migrations
                     b.Property<DateTime>("OrderDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2022, 7, 25, 20, 25, 24, 435, DateTimeKind.Local).AddTicks(539));
+                        .HasDefaultValue(new DateTime(2022, 7, 26, 23, 31, 31, 994, DateTimeKind.Local).AddTicks(7139));
 
                     b.Property<string>("ShipAddress")
                         .HasColumnType("nvarchar(max)");
