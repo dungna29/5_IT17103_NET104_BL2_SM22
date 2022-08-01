@@ -1,0 +1,53 @@
+﻿VIEW trong NetCore
+A. View
+	1. Thực hành xem lại bài Bai_7_Actions trong SinhVienActionVerbController
+	2. Định nghĩa: View cần lấy dữ liệu từ Controller. Một trong những cách truyền dữ liệu sang View là sử dụng đối tượng ViewData hoặc ViewBag.
+		+ View Data: ViewData truyền dữ liệu sang View từ Controller. Khi bạn gọi phương thức View trong Controller action, ViewData sẽ tự động gán vào View. Trong View bạn có thể truy cập giá trị được lưu trong ViewData cũng sử dụng key. Dữ liệu được lưu trong ViewData tồn tại chỉ trong request đó. Khi View được tạo xong cho client thì đối tượng ViewData đó cũng bị hủy.
+		+ View Bag: Không cần chuyển kiểu dữ liệu khi sử dụng
+		+ Cả ViewBag và ViewData đều sử dụng ViewDataDictionary bên dưới. Vì thế bạn có thể sử dụng cả hai hoặc kết hợp chúng khi đọc hoặc ghi chúng.
+		+ ViewData và ViewBag có thể truyền dữ liệu từ Controller sang View. Nó không thể truyền ngang từ Controller này sang Controller kia được.
+
+	3. Model và ViewModel: Model là tập hợp các đối tượng chứa dữ liệu của ứng dụng có thể chứa thêm cả các logic nữa. Model chia làm một số loại dựa trên công dụng và nơi chúng sử dụng. Có 3 loại mục đích chính:
+		+ Domain Model: Một Domain Model thể hiện một đối tượng trong database. Domain model thường có một mối quan hệ 1-1 với một bảng  trong cơ sở dữ liệu. Domain Model liên quan đến tầng truy cập dữ liệu (DAL) trong ứng dụng. Nó nhận từ cơ sở dữ liệu hoặc một nơi nào đó lưu dữ liệu bởi tầng truy cập dữ liệu. (DAL). Domain Model cũng được hiểu như entity model hay data model.
+		+ View Model: ViewModel được tham chiếu đến các đối tượng chứa dữ liệu cần cho việc hiển thị cho người dùng. ViewModel liên quan đến tầng hiển thị của ứng dụng. Nó được định nghĩa dựa trên cách thức dữ liệu được hiển thị cho người dùng hơn là cách chúng được lưu trữ ra sao?
+		+ Edit Model: Edit Model hoặc Input Model đại điện dữ liệu cần để người dùng thay đổi hoặc thêm mới. Yêu cầu UI của Product cần chỉnh sửa khác với yêu cầu xem.
+		+ Model trong MVC Design Pattern: MVC Design Pattern là một pattern cho tầng hiển thị. Model trong MVC Design Pattern viết tắt của View Model và Edit Model. Hầu hết mọi người sử dụng từ View Model để chỉ cả 2 thằng này: View Model và Edit Model.
+		+ Lợi ích và cách sử dụng của View Model
+			- ViewModel rất hữu dụng khi bạn có một UI phức tạp, khi mà dữ liệu cần lấy ra từ vài Domain Model. Vì View Model được độc lập với Domain Model, nên việc này rất mềm dẻo và linh hoạt cho việc sử dụng nó. ViewModel giúp ứng dụng bảo mật hơn vì bạn không phải chìa các thuộc tính nhạy cảm và bí mật từ Domain Model ra như UserRole,  IsAdmin...
+			- Giữ Domain Model và View Model tách bạch
+			- Tránh sử  dụng Domain model thay cho View Model. Bạn có thể chìa những thuộc tính nhạy cảm ra ngoài cho View. Domain Model thường gắn chặt vào database để sử dụng tầng DAL. Vì thế việc chìa các thuộc tính có thể sửa hay thêm mới vào database là nguy hiểm.
+			- Tạo Strongly Typed Views (View luôn có khai báo ViewModel tương ứng)
+			- Trong Strongly Typed Views, bbanj hãy để View biết kiểu của viewModel được gán cho nó. Với strongly typed view, bạn sẽ có thể có sự trợ  giúp gợi ý thuộc tính từ Visual Studio và dễ tìm lỗi nếu có trong  quá trình phát triển.
+			- Sử dụng Data Annotation cho Validation
+			- Sử dụng Data Annotation để khai báo cho thuộc tính của viewModel và giúp tận dụng cơ chế client validation trong ASP.NET Core.
+			- Chỉ đặt các dữ liệu cần thiết trong ViewModel
+			- Giữ ViewModel nhỏ nhất có thể. Chỉ đặt các trường thực sự cần thiết cho việc hiển thị trong ViewModel.
+			- Sử dụng một Mapper để chuyển Model sang ViewModel
+			- Model nhận từ cơ sở dữ liệu cần được map sang ViewModel. Bạn có thể sử dụng AutoMapper để thực hiện điều này.
+			- ViewModel có thể chứa các logic chỉ cho view
+			- Về ý tưởng, ViewModel có thể chứa các dữ liệu và không có logic. Nhưng bạn có thể thêm một số logic đặc thù cho ViewModel.
+			- Sử dụng 1 ViewModel cho 1 View
+			- Tạo một ViewModel cho một View. Sẽ dễ bảo trì và dễ tìm lỗi.
+
+B. View HTML:
+	1. Định nghĩa:
+		+ Các View html được bố trí trong thư mục Views, nó là các template có phần mở rộng .cshtml, Có thể nhúng mã C# trong view(Razor), những đoạn nhúng mã server side thì bắt đầu bằng ký hiệu @
+		+ Khi một Action trả về đối tượng ViewResult thì nó sẽ sử dụng View .cshtml để tạo nội dung HTML. Nó sẽ tìm đến thư mục Views, tìm đến thư mục cùng tên Controller, ví dụ Home, sau đó là file .cshtml cùng tên với Action - file .cshtml tìm được sẽ sinh HTML
+	2. Nhiệm vụ: Render ra giao diện và hiển thị model lên là trách nhiệm của View. View không nên chứa bất cứ logic nào và không được xử lý logic. View có thể sử dụng bất cứ định dạng nào để trả về cho user. Định dạng có thể là HTML, JSON, XML hay là bất cứ định dạng nào khác.
+	3. Thư mục chứa: Views
+	4. Quy tắc chung:
+		a.Tên View:   Theo quy tắc, tên phải cùng tên với Action Method name. Bạn có thể ghi đè phương thức này bằng cách đặt tên khác đi. Nếu bạn làm điều này thì bạn sẽ cần phải chỉ ra tên của View trong tham số đầu tiên của phương thức View: View(“ViewName”)
+		b. Template: Template có vài tùy chọn như Create, Delete, Details, Edit, List, Empty (without Model). Các template ở trên cần một model, ngoại trừ Empty Template. Visual Studio tạo ra một view để create, edit, delete...trên model được cung cấp phụ thuộc vào template mà bạn chọn. Mỗi Template trên đều có giải thích phía dưới.
+			+ Create: Tạo một HTML Form để tạo mới một model. Nó tạo ra một label và một input cho mỗi thuộc tính trong model.
+			+ Delete: Tạo một HTML Form cho việc xóa model. Nó tạo ra một label và giá trị heienj tại cho mỗi thuộc tính của model.
+			+ Details: Tạo mới một view để hiển thị model. Nó tạo ra một label và giá trị của mỗi thuộc tính trong model.
+			+ Edit: Nó tạo ra một HTML form để sửa model. Nó tạo ra một label và một input cho mỗi thuộc tính của model.
+			+ Empty: Tạo ra một view trống
+			+ List: Tạo ra một HTML Table hiển thị danh sách model. Nó tạo ra một cột cho mỗi thuộc tính của Model. Bạn cần trả về một IEnumerable<Model> cho View. View cũng chứa danh sách các hành động để thực hiện như create/edit/delete.
+			+ Model class: Dropdown hiển thị tất cả các Model class trong project. Tùy chọn này được loại bỏ nếu bạn chọn Empty project.
+			+ Partial View:  Tùy chọn này là Create a Partial View. Partial View tạo một phần của view và không phải view hoàn chỉnh. PartialViewResult sử dụng model để tạo ra một phần của View. Kết quả của partial view nhìn giống hư một view bình thường ngoại trừ nó không có thẻ <html> hoặc không có thẻ <head> ở trên của View. Chọn tùy chọn này chỉ ra view của bạn sẽ tạo không phải view đầy đủ vì thế tùy chọn Layout sẽ bị bỏ đi.
+			+ Scripts: Chọn tùy chọn này sẽ thêm jquery.validate.min.js và jquery.validate.unobtrusive.min.json vào thưu viện JavaScript. Các thư viện này cần thiết cho triển khai client-side validation. CÁc thư viện này đòi hỏi khi tạo view chứa một đầu vào cho dữ liệu như một Form Edit view hoặc một form Create.
+			+ Layout Page: Tùy chọn này cho phép bạn chọn một Layout page cho View. Layout page được dùng để chia sẻ các thành phần dùng chung trong trang của bạn và cung cấp một giao diện đồng nhất trong toàn bộ hệ thống.
+			VÍ DỤ: Bai_4_MVCWebApp đã thực hiện trả về 1 model ra view
+	6. Layout Page: Giúp đảm bảo sự thống nhất giữa các trang  trong toàn bộ các view của ứng dụng. Các phần menu, header, footer thường sẽ không thay đổi qua các view
+

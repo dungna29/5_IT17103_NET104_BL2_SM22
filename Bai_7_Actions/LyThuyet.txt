@@ -14,4 +14,26 @@
 		2.IActionResult và ActionResult:
 			+ IActionResult là một interface nó định nghĩa một khuôn mẫu cho toàn bộ các Action Result của một action method.
 			+ ActionResult là một abstract base class triển khai interface IActionResult. Action result như ViewResult, PartialViewResult hay JsonResult...đều kế thừa từ ActionResult base class.
-		Ví dụ: 
+		Ví dụ: SinhVienActionResultsController
+		3.Chuyển hướng người dùng(Redriect ): Redriect result được dùng khi bạn muốn chuyển hướng người dùng đến một URL khác. Có 4 loại redirect result có sẵn. RedirectResult, LocalRedirectResult, RedirectToActionResult và RedirectToRouteResult.
+		4. Trả về file: FileResult là một Action result sử dụng bởi Controller action để trả về file cho người dùng. FileResult là một base class sử dụng để gửi file nhị phân về response. Nó là một abstract class được triển khai bởi FileContentResult, FileStreamResult, VirtualFileResult, và PhysicalFileResult. Các class này đảm nhiệm công việc gửi file về client.
+		5. Trả về nội dung văn bản: Content Result
+			+ JsonResult: Action result này trả về dữ liệu được định dạng JSON. Nó chuyển một object sang JSON và trả nó về client:
+			+ ContentResult: ContentResult ghi một nội dung cụ thể trực tiếp vào response như một chuỗi định dạng văn bản thuần.
+			+ EmptyResult: EmptyResult giống như tên của nó không chứa cái gì cả. Sử dụng nó khi bạn muốn thực thi một số logic trong controller nhưng không muốn trả về gì.
+		6. Trả về lỗi và HTTP Code: Loại Action result này được dùng trong Web API Controller. Kết quả sẽ được gửi về kèm HTTP Status Code. Một trong số chúng thì có thể gửi một đối tượng vào response.
+			+ StatusCodeResult StatusCodeResult gửi kết quả và chỉ ra một HTTP Status code:
+			+ ObjectResult: Action result này sẽ trả về một đối tượng kèm một HTTP Status Code là 200. Nó là một overload của method StatusCode
+			+ OkResult: Action result này trả về nguyên chỉ có HTTP Status code 200:
+			+ OkObjectResult Action result này trả về một HTTP Status code 200:
+			+ CreatedResult: CreatedResult sử dụng khi một tài nguyên được tạo ra sau request Post. Nó gửi trạng thái 201 về kèm đối tượng vừa được tạo:
+			+ CreatedAtActionResult: Cái này tương tự CreatedResult nhưng nó nhận vào Controller và Action thay vì URL:
+			+ CreateAtRouteResult: Action Result này nhận vào gái trị route và tương tự như CreatedResult và CreatedAtActionResult
+			+ BadRequestResult: Action result này gửi về một HTTP Status code 400 cho client. Sử dụng response status code này khi chỉ ra cú pháp không đúng hoặc một request không được rõ ràng.
+			+ BadRequestObjectResult: Action result này tương tự BadRequestResult. Khác nhau là bạn có thể gửi về một ModelStateDictionary (chứa chi tiết lỗi) và cũng là status 400:
+			+ NotFoundResult: Action result này trả về lỗi HTTP 404 cho client:
+			+ NotFoundObjectResult: Action result này tương tự nuhw NotFoundResult nhưng trả về một đuối tượng kèm lỗi 404. Overload thứ 2 của NotFound giúp nhận một đối tượng làm tham số để trả về NotFoundObjectResult.
+			+ UnsupportedMediaTypeResult: Action result này gửi về lỗi HTTP 415. Sử dụng action result này khi request với định dạng không được hỗ trợ bởi server.
+			+ NoContentResult: Action result này gửi lỗi HTTP 204 về. Sử dụng NoContentResult này khi request thành công nhưng không có nội dung nào được trả về
+			+ Kết quả liên quan đến bảo mật: SignInResult là kết quả của hành động đăng nhập. SignInManager.SignInAsync hoặc PasswordSignInAsync trả về một SignInResult. Nó có 4 thuộc tính là Succeeded, IsLockedOut, IsNotAllowed và RequiresTwoFactor
+
