@@ -237,6 +237,6 @@ namespace EFCORE_DBFIRST_LIBRARY.Context
             OnModelCreatingPartial(modelBuilder);
         }
 
-        partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
     }
 }

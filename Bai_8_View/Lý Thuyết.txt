@@ -51,3 +51,10 @@ B. View HTML:
 			VÍ DỤ: Bai_4_MVCWebApp đã thực hiện trả về 1 model ra view
 	6. Layout Page: Giúp đảm bảo sự thống nhất giữa các trang  trong toàn bộ các view của ứng dụng. Các phần menu, header, footer thường sẽ không thay đổi qua các view
 
+	C. Strongly Typed View:
+		1. View nào mà được kết hợp với một kiểu cụ thể của ViewModel thì được gọi là Strongly Typed View. Bằng cách chỉ ra model, Visual Studio cung cấp cơ chế gợi ý và kiểm tra kiểu lúc biên dịch. Chúng ta đã học cách truyền dữ liệu từ Controller sang View trước đây. Điều này thường được giải quyết với ViewBag hoặc ViewData. Trình biên dịch không biết gì về kiểu của model.
+		2. Trong Strongly typed view, chúng ta biết View sử dụng ViewModel nào sử dụng khai báo @model.
+		3. Strongly typed view được tạo sử dụng khai báo @model. ViewData có một thuộc tính đặc biệt gọi là Model. Nó là một đối tượng kiểu dynamic. Nó cho phép chúng ta sử dụng ViewData.Model.Prop. Sử dụng Model cách này không giúp Visual phát hiện và kiểm tra thuộc tính của model mà phải chờ lúc chạy chương trình mới phát hiện lỗi. Nhờ thế thì việc kiểm tra kiểu lúc biên dịch cũng không có.
+		4. Vấn đề ở trên đã được giải quyết bằng cách chỉ cho View biết kiểu của model sẽ được găn vào ViewData.Model. Nó được giải quyết bằng khai báo @model, nó được đặt ở trên cùng của file View và chỉ ra kiểu của ViewModel được gán.
+		5. Khi bạn sử dụng khai báo @model, Razor engine sẽ gán kiểu choViewData.Model. Thuộc tính Model sẽ trả về kiểu được khai báo.
+

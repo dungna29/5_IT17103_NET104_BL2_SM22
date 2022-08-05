@@ -1,0 +1,43 @@
+﻿A. Tag Helper
+	1.Tag Helpers là gì?
+        + Tag Helper giúp chúng ta viết phần tử HTML trong Razor sử dụng cú pháp thân thiện với HTML. Nó nhìn như là HTML chuẩn vậy nhưng code được xử lý bởi Razor Engine trên server và nó tận dụng đươc các ưu điểm của việc xử lý phía server.
+	    + Razor được tạo sử dụng Tag Helper nhìn như phần tử HTML thuần. Nó thao tác với các phần tử HTML như thêm mới phần tử HTML hay thay thế các nội dung có sẵn bằng một cái mới.
+	2. Mục đích:
+        + Bạn có thể tạo form mà không cần dùng Tag Helper (hoặc HTML Helper) như bài trước. Tuy nhiên Tag Helper sẽ giúp tạo ra view HTML đơn giản hơn dựa trên dữ liệu từ Model gắn vào nó. Ví dụ Label Tag Helper sẽ tạo ra tiêu đề dựa trên attribute Data Annotation trong View Model. Tương tự như thế thì Input Tag Helper sẽ tạo ra id, name, type của phần tử HTML dựa  trên kiểu dữ liệu của Model và thuộc tính Data Annotation.
+	3.Sử dụng Tag Helper?
+        + ASP.NET Core Tag Helper nằm trong thư viện Microsoft.AspNetCore.Mvc.TagHelpers bạn cần import thư viện này để sử dụng Tag Helper.
+        + Thêm Tag Helper sử dụng @addTagHelper
+            - Đoạn code trên sử dụng wildcard ("*") để chỉ ra tất cả Tag Helper được thêm vào từ thư viện Microsoft.AspNetCore.Mvc.TagHelpers.
+            - @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+        + Bỏ Tag Helper
+            - @removeTagHelper "*, Microsoft.AspNetCore.Mvc.TagHelpers"
+        + Thêm một số Tag Helper chỉ định
+        + @addTagHelper "Microsoft.AspNetCore.Mvc.TagHelpers.InputTagHelper, Microsoft.AspNetCore.Mvc.TagHelpers"
+        + Tắt Tag Helper với !
+            - Bằng cách sử dụng ký tự ! trước mỗi phần tử HTML, bạn sẽ có thể vô hiệu hóa tag helper cho phần tử đó:
+            -  <!label asp-for="Name"></!label>
+        + Sử dụng @tagHelperPrefix để bật Tag Helper
+            - Thay vì vô hiệu hóa tag helper sử dụng ký tự !, bạn có thể sử dụng @tagHelperPrefix
+            - @tagHelperPrefix th:
+            - Giờ thì tiền tố th: phải được chỉ ra cho tất cả các tag helper trên view, để bật tag helper cho nó:
+                - <th:label asp-for="Name"></th:label>    //Tag helper is enabled
+                - <label asp-for="Address"></label>          //Tag helper is disabled
+        + Form Tag Helper
+            - asp-controller: Chỉ ra tên Controller sử dụng
+            - asp-action: Chỉ ra tên action method sử dụng
+            - asp-area: Chỉ ra tên Area sử dụng
+        + Label Tag Helper
+            - Label Tag Helper được áp dụng cho phần tử label. Nó có một thuộc tính là asp-for. Sử dụng như sau:
+                - <label asp-for="@Model.Name"></label>
+            - Nó sẽ dịch ra:
+                - <label for="Name">Name</label>
+            - Tên của trường đó sẽ được lấy từ tên của thuộc tính trong Model hoặc từ Data Annotation của thuộc tính trong Model. Sử dụng từ khóa @Model là không bắt buộc. Bạn có thể chỉ ra tên thuộc tính trong Model luôn:
+                - <label asp-for="Name"></label>
+        + Input Tag Helper
+            Tương tự, Input Tag Helper cũng được áp dụng cho phần tử input:
+            <input asp-for="Name" />
+    4. Lợi ích của Tag Helper
+        + Thân thiện với cú pháp HTML: Tag Helper nhìn như là phần tử HTML chuẩn. Các Front end Developer không cần học cú pháp C# hay Razor để thêm các phần tử này vào View. Vì thế nó dễ dàng đạt được tính chất chia để trị. Bạn có thể dễ dàng thêm CSS hoặc bất cứ thuộc tính HTML nào vào Tag Helper như là với HTML.
+        + Được hỗ trợ bởi IntelliSense: Tag Helper cung cấp sự hỗ trợ bởi cơ chế gợi ý thông minh của Visual Studio. Ví dụ dưới khi chúng ta thấy gợi ý cho label của thuộc tính Rating.
+        + Code sạch hơn:  Code sẽ sạch và rõ ràng hơn sử dụng HTML Helper cũ. Không cần phải sử dụng ký tự @ để chuyển giữa C# và HTML.
+    5. Input tag helper: Input Tag Helper tạo ra phần tử HTML tương ứng với thuộc tính của Model là input. Thuộc tính model được kết hợp với tag helper sử dụng thuộc tính asp-for. Input tag helper tạo ra các thuộc tính HTML tương ứng như type, name và id dựa trên các thông tin của thuộc tính model như kiểu dữ liệu và data annotation được áp dụng vào thuộc tính của ViewModel. ViewModel phải gắn vào một strongly typed view. Nó cũng cung cấp các validation cho thuộc tính giúp có thể hỗ trợ validate phía client. Thuộc tính asp-format giúp định dạng các dữ liệu nhập vào.
